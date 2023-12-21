@@ -1,157 +1,137 @@
+/* arreglo con lass tasas de interes por numero de cuotas */
+const tasas = [{cuoMenIguQue:  6, interes: 2.1 },
+               {cuoMenIguQue: 12, interes: 1.8 },
+               {cuoMenIguQue: 24, interes: 1.5 },
+               {cuoMenIguQue: 36, interes: 1.2 },
+               {cuoMenIguQue: 60, interes: 0.9 }
+];
 
-//CREAR ALGORITMO CON CONDICIONAL
+const cuotasPermitidas = tasas.map(function(tasas) {
+     return tasas.cuoMenIguQue;
+});
 
-/* Pedir un nombre de equipo mostrar su puntaje
-                                                */
+/* arreglo limetes de monto a otorgar segun nivel de riesgo del cliente  */
+const mtoLimite = [{glsRiesgo: "Cliente sin Riesgo",        nivelRiesgo: "0", mtoMaxi: 9999999999 },
+                   {glsRiesgo: "Cliente poco Riesgoso",     nivelRiesgo: "1", mtoMaxi: 20000000},
+                   {glsRiesgo: "Cliente Riesgo intermedio", nivelRiesgo: "2", mtoMaxi: 5000000},
+                   {glsRiesgo: "Cliente Riesgoso",          nivelRiesgo: "3", mtoMaxi: 1000000},
+                   {glsRiesgo: "Cliente muy Riesgoso",      nivelRiesgo: "4", mtoMaxi: 0}
+];
 
-
-let equipo =  prompt("Ingrese el Nombre del Equipo de Futbol: ");
-
-let ptjColoColo   = 43;
-let ptjPiverPlate = 45;
-let ptjUdeChile   = 46;
-let ptjBocaJunior = 43;
-
-let eqpColoColo   = "Colo Colo";
-let eqpRiverPlate = "River Plate";
-let eqpUdeChile   = "U de Chile";
-let eqpBocaJunior = "Boca Junior";
-
-document.write(eqpColoColo)
-document.write("<br>")
-document.write(eqpRiverPlate)
-document.write("<br>")
-document.write(eqpUdeChile)
-document.write("<br>")
-document.write(eqpBocaJunior)
-document.write("<br>")
-document.write(equipo)
-document.write("<br>")
-
-let puntaje = 0
-
-if (equipo === eqpColoColo) {
-     puntaje = ptjColoColo;
+// Funcion para validar el nivl de riego del cliente
+// y recuperar el monto maximo de prestamo segun nivel de riesgo del cliente
+function riesgo(nivelRiesgo){
+     
+     const mtoPrestamo = mtoLimite.find((item) => item.nivelRiesgo === nivelRiesgo);
+ 
+     if (mtoPrestamo) {
+          alert(`
+          Dato para validar el monto maximo  del prestamo
+          ============================================
+               Nivel de Riesgo Ingresado : ${mtoPrestamo.nivelRiesgo}
+               Monto Maximo de Prestamo  : ${mtoPrestamo.mtoMaxi}
+               Glosa Riesgo Cliente      : ${mtoPrestamo.glsRiesgo}
+          `);
+          return mtoPrestamo.mtoMaxi
+     } else {
+          alert("Nivel de Riesgo Invalido");
+          return 0;
+     }
 }
 
-if (equipo === eqpRiverPlate) {
-     puntaje = ptjRiverPlate;
-} 
+// Funcion para validar el numero de cuotas ingresado y
+// y recuoperar el interes a a aplicar de acuerdo a la cantidad de meses solicitados
+function obtieneInteres(){
 
-     
-if (puntaje != 0) {
-     alert("el puntaje de " + equipo + " es " + puntaje + " puntos");
-     document.write("<br>")
-     document.write(puntaje)
-     document.write("<br>")
-     document.write(equipo)
-     document.write("<br>")
+     while(true){
+          let numCuotas = Number(prompt("Ingrese Numero de Cuotas: "));
 
- } else {
-     alert("Equipo incorrecto");
- }
-
-
-document.write("********************************************")
-document.write(" ")
-document.write("<br>")
-document.write(" ")
-document.write("<br>")
-
-
-//CREAR ALGORITMO CON CICLO
-
-/* Pedir un numero y calcular la suma desde 1
-   hasta el numero ingresado                    */
-
- 
-   let numero = Number(prompt("Ingrese  numero para calcular la suma y multiplicacion desde 1 hasta el numero"));
-   let num1 = 0;
-   
-   var i 
-   for (i=1;i<=numero;i++) { 
-        num1 +=  i;
-   }
-   
-   alert("La sumaroria de 1 hasta " + numero  + " es: " + num1);
-   
-   let j = 0;
-   let num2 = 1;
-   while ( j < numero) {
-        j++;
-        num2 = num2 * j;
-   }
-   
-   alert("La multiplicacion de 1 hasta " + numero  + " es: " + num2);
-
-   
-
-// SIMULADOR DE PRESTAMO                    
-
-
-let capital = Number(prompt("Para calculo del valor cuota de un prestamo Ingrese  Capital: "));
-let numCuotas = Number(prompt("Ingrese Numero de Cuotas: "));
-let interes = Number(prompt("Ingrese Interes, con punto como decimal (.): "));
-
-
-document.write("********************************************")
-document.write(" ")
-document.write("<br>")
-document.write(" ")
-document.write("<br>")
-
-
-if (capital == 0 && numCuotas == 0 && interes == 0) {
-   alert("No hay simulacion nos vamos");
-}  else  {
-     if (capital == 0 || numCuotas == 0 || interes == 0) {
-          alert("Capital, Numero de Cuota e Interes debe ser distintos de cero");
-     }  else  
-        
-          CapMasInteres = capital + (capital * (interes / 100)) * numCuotas
-          valorCuota = CapMasInteres / numCuotas
-          document.write(CapMasInteres)
-          document.write("<br>")
-          document.write(valorCuota)
-          document.write("<br>")
-          document.write("-==================-")
-          document.write("<br>")
-
-        
-          document.write("Cuota_ Valor cuota_______ Interes__________  Valor cuota final")
-          document.write("<br>")
-          document.write("=====  =============== ============== =============")
-          document.write("<br>")
-
-
-
-          for(i=1;i<=numCuotas;i++)
-          {
-               valorCuotaK = capital / numCuotas;
-               ValorIntcuota = ((capital * interes) / 100) / numCuotas;
-               valorCuotaF = valorCuotaK + ValorIntcuota;
-
-               if  (i < 10) {
-                    document.write("____ ")
-                } else {
-                    document.write("___ ")
-               
-               }
-
-               document.write("   ",i)
-               document.write(" ")
-               document.write(valorCuotaK)
-               document.write(" ")
-               document.write(ValorIntcuota)
-               document.write(" ")
-               document.write(valorCuotaF)
-               document.write(" ")
-               document.write("<br>")
-              
-           }
-
-            
-          alert("El valor de la cuota es: " + valorCuotaF );
-
+          if (numCuotas == null) {
+               return [0, 0];;
           }
+ 
+          const ptjInteres = tasas.find((item) => item.cuoMenIguQue == numCuotas);
+    
+          if (ptjInteres) {
+                    return [numCuotas, ptjInteres.interes];
+          } else {   
+                    alert(`
+                         Numero de cuotas no permitido
+                         =============================
+                         Cantidad de Cuotas Solicitada         : ${numCuotas}
+                         solo se aceptan las siguentes Cuotas  : ${cuotasPermitidas}
+                    `);
+                 }
+     }
+}
 
+// Funcion para calcular el valor de la cuota
+// momentaneamente se inhibe el calculo ya que me dio error se corregira luego
+function calcValorCuota(monto, cuotas, intereses) {
+
+     CapMasInteres = monto + (monto * (intereses / 100)) * cuotas
+     valorCuota = CapMasInteres / cuotas
+//    for(i=1;i<=cuotas;i++)
+//     {
+//          valorCuotaK = mtoPrestamoSol / numCuotas;
+//          ValorIntcuota = ((mtoPrestamoSol * interesXNumCuota) / 100) / numCuotas;
+//          valorCuotaF = valorCuotaK + ValorIntcuota;         
+//      }
+     return valorCuota
+}
+
+let nivelRiesgo      = 0;
+let numCuotas        = 0;
+let mtoPrestamoSol   = 0;
+let mtoMaxPrestamo   = [];
+let interesXNumCuota = [];
+
+while(true){
+     let nivelRiesgo = prompt("ingrese nivel de riesgo del cliente: ");
+
+     if(nivelRiesgo == null)
+     break
+
+     const mtoMaxPrestamo = riesgo(nivelRiesgo)
+
+     if (mtoMaxPrestamo > 0) {
+          let mtoPrestamoSol = Number(prompt("Ingrese monto del prestamo solicitado: "));
+
+             if (mtoPrestamoSol == null || mtoPrestamoSol == 0) {
+               alert(`
+                    No se ingreso algun monto
+                    Debe ingresar nivel de riesgo nuevamente
+               `);
+          } else {
+
+               if (mtoPrestamoSol > mtoMaxPrestamo) {
+                    alert(`
+                     Monto solicitado excede mto maximo segun nivel de Riesgo
+                     ====================================================
+                         Esta solicitando                    : ${mtoPrestamoSol}
+                         y el Monto Maximo de Prestamo es de : ${mtoMaxPrestamo}
+                         Nivel de Riesgo del cliente es      : ${nivelRiesgo}
+                    `);
+               } else {
+                         const [numCuotas, interesXNumCuota] = obtieneInteres()
+                         alert(`
+                              Dato para el calcuno del valor cuota
+                              ====================================
+                                 numero de cuotas  : ${numCuotas}
+                                 interes obtenido  : ${interesXNumCuota}
+                         `);
+
+                         if (numCuotas !== 0) {
+                             const valorCuotaF = calcValorCuota(mtoPrestamoSol, numCuotas, interesXNumCuota)
+                                               
+                             alert(`
+                                   =============================================
+                                      El valor de la cuota es : ${valorCuotaF}
+                                   =============================================
+                             `);
+                         }
+
+                      }
+          }    
+     }
+}    
